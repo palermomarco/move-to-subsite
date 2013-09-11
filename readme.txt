@@ -5,8 +5,8 @@ Requires at least: 3.3.2
 Tested up to: 3.4RC
 Stable tag: 0.2
 
-Move posts in a category and/or a page hierarchy to a new subsite, with seamless redirects.
-It copy also post attachments (database copy).
+Wordpress multisite plugin to move posts in a category and/or a page hierarchy to a new subsite, with seamless redirects. 
+It copy also post attachments.
 
 == Description ==
 

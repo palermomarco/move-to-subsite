@@ -1,8 +1,14 @@
 === Move Post/Page to Subsite ===
+
+
 Contributors: palermomarco, mattwiebe
+
 Tags: move, multisite, migrate, export, import
+
 Requires at least: 3.3.2
+
 Tested up to: 3.4RC
+
 Stable tag: 0.2
 
 Wordpress multisite plugin to move posts in a category and/or a page hierarchy to a new subsite, with seamless redirects. 

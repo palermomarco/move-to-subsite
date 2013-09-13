@@ -64,15 +64,12 @@ class MW_Move_Posts {
 
         foreach ($query->posts as $post) {
             self::move_post($post);
-            break;  /*************************************************************************************************************/
         }
 
         self::$count = count($query->posts);
     }
 
     protected function move_post($post) {
-        
-        
         
         $old_link = trailingslashit(get_permalink($post->ID));
         $cats = get_the_terms($post->ID, 'category');
@@ -83,7 +80,6 @@ class MW_Move_Posts {
         $thumb_id = get_post_meta($post->ID, '_thumbnail_id', true);
         $thumb_post = get_post($thumb_id);
         $thumb_metas = get_post_meta($thumb_id);
-
 
         wp_trash_post($post->ID);
         switch_to_blog(self::$new_blog_id);
@@ -99,16 +95,12 @@ class MW_Move_Posts {
         unset($thumb_post->ID);
         $thumb_new_id = wp_insert_attachment($thumb_post, false, $new_id);
                                                                                 
-        //print_r( array('new_thumb' => $thumb_new_id, 'new_post_id' => $new_id) );
-                                                                                
                                                                                 
         self::do_comments($new_id, $comments);
         self::migrate_meta($new_id, $meta);
         self::migrate_meta($thumb_new_id, $thumb_metas);
-        
                                                                                 
         update_post_meta( $new_id, '_thumbnail_id', $thumb_new_id );
-        
 
         // Doing it ?p=ID style to allow the new blog to change permalinks
         $new_link = trailingslashit(self::$new_blog_url) . '?p=' . $new_id;

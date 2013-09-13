@@ -1,3 +1,66 @@
+<style type="text/css">
+div.album {
+    float:left;
+    width:200px;
+    height:150px;
+    margin-right:15px;
+}
+div.album td {
+    font-size:0.9em;
+}
+div.album-hidden img {
+    opacity:0.5;
+}
+.form-table {
+	max-width: 850px;
+	float: left;
+	clear: none;
+	margin: 0 40px 20px 0;
+}
+.form-table th h3 {
+	margin: 0;
+}
+.wps3-author {
+	width: 250px;
+	float: left;
+	padding: 20px;
+	border: 1px solid #ccc;
+	overflow: hidden;
+	margin: 0 0 40px 0;
+}
+.wps3-author img {
+	float: left;
+	margin-right: 20px;
+	border-radius: 32px;
+}
+.wps3-author .desc {
+	float: left;
+}
+.wps3-author h3 {
+	font-size: 12px;
+	margin: 0;
+}
+.wps3-author h2 {
+	font-size: 18px;
+	margin: 0;
+	padding: 0;
+}
+.wps3-author h2 a {
+	color: #464646;
+	text-decoration: none;
+}
+.wps3-author h2 a:hover {
+	color: #000;
+}
+.wps3-author p {
+	margin: 0;
+}
+.wps3-author .github {
+	padding-top: 5px;
+}
+</style>
+
+
 <div class="wrap">
 	<?php screen_icon(); ?>
 	<h2><?php _e( 'Move to Subsite', 'mw-move-to-subsite' ) ?></h2>
@@ -52,6 +115,23 @@
 		MW_Move_Base::nonce_field();
 		submit_button( __( 'Move to Subsite!', 'mw-move-to-subsite' ) ) ?>
 	</form>
+        
+        <div class="wps3-author">
+            <img src="http://www.gravatar.com/avatar/a2611b745e80bbe85ae0cacb8b621e64?s=128&amp;d" width="64" height="64" />
+            <div class="desc">
+                <h3>Maintained by</h3>
+                <h2>Marco Palermo</h2>
+                <p>
+                    <a href="http://profiles.wordpress.org/palermomarco">Profile</a>
+                    &nbsp;&nbsp;
+                    <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=9EV95JP2E5WXA">Donate</a>
+                </p>
+                <p class="github">
+                    <a href="https://github.com/palermomarco/move-to-subsite/">Contribute on GitHub</a>
+                </p>
+            </div>
+        </div>
+        
 </div>
 <script>
 	jQuery(document).ready(function($){

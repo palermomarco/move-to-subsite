@@ -1,5 +1,6 @@
-=== Move Post/Page to Subsite ===
+=== Move Post/Page to WP MU Subsite  ===
 Contributors: palermomarco
+Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=9EV95JP2E5WXA
 Tags: move, multisite, migrate, export, import
 Requires at least: 3.3.2
 Tested up to: 3.6

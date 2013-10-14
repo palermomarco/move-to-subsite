@@ -89,6 +89,7 @@ class MW_Move_Posts {
         unset($post['ID']);
         $post['post_category'] = self::map_cats($cats);
         $post['tags_input'] = self::comma_tags($tags);
+        print_r($post);exit;
         $new_id = wp_insert_post($post);
                                                                                 
         $thumb_post->post_parent = $new_id;

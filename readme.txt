@@ -1,10 +1,12 @@
 === Move Post/Page to WP MU Subsite  ===
 Contributors: palermomarco
-Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=9EV95JP2E5WXA
+Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=9EV95JP2E5WXA
 Tags: move, multisite, migrate, export, import
 Requires at least: 3.3.2
 Tested up to: 3.6
 Stable tag: 0.2
+License: GPLv2 or later 
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Wordpress multisite plugin to move posts in a category and/or a page hierarchy to a new subsite, with seamless redirects. 
 It copy also post attachments.

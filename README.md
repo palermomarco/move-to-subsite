@@ -1,7 +1,7 @@
 === Move Post/Page to Subsite ===
 
 
-Contributors: palermomarco, mattwiebe
+Contributors: palermomarco
 
 Tags: move, multisite, migrate, export, import
 

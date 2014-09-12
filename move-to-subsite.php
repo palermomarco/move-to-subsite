@@ -3,10 +3,10 @@
   Plugin Name: Move to Subsite
   Description: Move posts in a category and/or a page hierarchy to a new subsite, with seamless redirects. It move also attachments.
   Version: 0.2
-  Author: Marco Palermo 
+  Author: Marco Palermo
   Author URI: http://www.mediaprime.it/
   Plugin URI: https://github.com/palermomarco/move-to-subsite
-  
+
   Forked from the work of Matt Wiebe (http://wp.mattwie.be) at http://wordpress.org/plugins/move-to-subsite/
 
 == Copyright ==

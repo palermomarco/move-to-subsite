@@ -70,13 +70,13 @@ class MW_Move_Posts {
     }
 
     protected function move_post($post) {
-        
+
         $old_link = trailingslashit(get_permalink($post->ID));
         $cats = get_the_terms($post->ID, 'category');
         $tags = get_the_terms($post->ID, 'post_tag');
         $comments = get_comments(array('post_id' => $post->ID));
         $meta = get_post_custom($post->ID);
-        
+
         $thumb_id = get_post_meta($post->ID, '_thumbnail_id', true);
         $thumb_post = get_post($thumb_id);
         $thumb_metas = get_post_meta($thumb_id);
@@ -90,16 +90,16 @@ class MW_Move_Posts {
         $post['post_category'] = self::map_cats($cats);
         $post['tags_input'] = self::comma_tags($tags);
         $new_id = wp_insert_post($post);
-                                                                                
+
         $thumb_post->post_parent = $new_id;
         unset($thumb_post->ID);
         $thumb_new_id = wp_insert_attachment($thumb_post, false, $new_id);
-                                                                                
-                                                                                
+
+
         self::do_comments($new_id, $comments);
         self::migrate_meta($new_id, $meta);
         self::migrate_meta($thumb_new_id, $thumb_metas);
-                                                                                
+
         update_post_meta( $new_id, '_thumbnail_id', $thumb_new_id );
 
         // Doing it ?p=ID style to allow the new blog to change permalinks
@@ -108,7 +108,7 @@ class MW_Move_Posts {
         restore_current_blog();
 
         self::make_redirect_post($old_link, $new_link);
-        
+
     }
 
     protected function move_page($post) {
@@ -150,7 +150,7 @@ class MW_Move_Posts {
             }
         }
     }
-    
+
     protected static function do_comments($post_id, $comments) {
         if (empty($comments))
             return;

@@ -91,7 +91,7 @@ div.album-hidden img {
 				<th scope="row"><?php _e( 'Path for blog: ', 'mw-move-to-subsite' ) ?></th>
 				<td>
 					<input type="text" name="blog_path" />
-					<p class="description"><?php 
+					<p class="description"><?php
 					if ( is_subdomain_install() ) :
 						_e( 'This will be <code>http://yourdomain.com/PATH</code>.', 'mw-move-to-subsite' );
 					else :
@@ -111,11 +111,11 @@ div.album-hidden img {
 				</td>
 			</tr>
 		</table>
-		<?php 
+		<?php
 		MW_Move_Base::nonce_field();
 		submit_button( __( 'Move to Subsite!', 'mw-move-to-subsite' ) ) ?>
 	</form>
-        
+
         <div class="wps3-author">
             <img src="http://www.gravatar.com/avatar/a2611b745e80bbe85ae0cacb8b621e64?s=128&amp;d" width="64" height="64" />
             <div class="desc">
@@ -131,7 +131,7 @@ div.album-hidden img {
                 </p>
             </div>
         </div>
-        
+
 </div>
 <script>
 	jQuery(document).ready(function($){

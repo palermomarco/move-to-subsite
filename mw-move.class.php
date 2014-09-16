@@ -71,6 +71,18 @@ class MW_Move_Posts {
 
     protected function move_post($post) {
 
+        $oldpost = $post;
+
+        global $wpdb;
+        $IDs = array();
+        //1. get old attachments
+        $attachments = $wpdb->get_results("SELECT * FROM $wpdb->posts WHERE post_parent = $oldpost->ID AND post_type = 'attachment'");
+
+        $metas_by_id = array();
+        foreach ($attachments as $att) {
+            $metas_by_id[$att->ID] = $wpdb->get_results("SELECT * FROM $wpdb->postmeta WHERE post_id = ".$att->ID);
+        }
+
         $old_link = trailingslashit(get_permalink($post->ID));
         $cats = get_the_terms($post->ID, 'category');
         $tags = get_the_terms($post->ID, 'post_tag');
@@ -99,6 +111,36 @@ class MW_Move_Posts {
         self::do_comments($new_id, $comments);
         self::migrate_meta($new_id, $meta);
         self::migrate_meta($thumb_new_id, $thumb_metas);
+
+        //2. duplicate old attachments data
+        foreach($attachments as $att):
+            $wpdb->query("INSERT INTO $wpdb->posts (post_title) VALUES ('')");
+            $newID = $wpdb->insert_id;
+            $IDs[] = array( 'old' => $att->ID, 'new' => $newID );
+            $query = "UPDATE $wpdb->posts SET ";
+            foreach( $att as $key=>$val ){
+                if( $key == 'post_name'):
+                    $query .= $key.' = "'.str_replace('"','\"',$val).'-2", ';
+                elseif( $key == 'post_parent' ):
+                    $query .= $key.' = "'.$new_id.'", ';
+                elseif ($key != 'ID'):
+                    $query .= $key.' = "'.str_replace('"','\"',$val).'", ';
+                endif;
+            }
+            $query = substr($query,0,strlen($query)-2); # lop off the extra trailing comma
+            $query .= " WHERE ID=$newID";
+            if( $wpdb->query($query) ){}else{echo $query; exit;}
+            $query = false;
+        endforeach;
+        // duplicate attachment meta data
+        foreach($IDs as $id):
+            $meta = $metas_by_id[$id['old']];
+            foreach( $meta as $mt ){
+                $query = "INSERT INTO $wpdb->postmeta (post_id, meta_key, meta_value) VALUES ('".$id['new']."', '".$mt->meta_key."', '".str_replace("'","\'",$mt->meta_value)."')";
+                if( $wpdb->query($query) ){}else{echo $query;exit;}
+                $query = false;
+            }
+        endforeach;
 
         update_post_meta( $new_id, '_thumbnail_id', $thumb_new_id );
 

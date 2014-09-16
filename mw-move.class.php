@@ -94,10 +94,10 @@ class MW_Move_Posts {
         $meta = get_post_custom($post->ID);
 
         $thumb_id = get_post_meta($post->ID, '_thumbnail_id', true);
-        $thumb_post = get_post($thumb_id);
-        $thumb_metas = get_post_meta($thumb_id);
+        // $thumb_post = get_post($thumb_id);
+        // $thumb_metas = get_post_meta($thumb_id);
 
-        wp_trash_post($post->ID);
+        wp_trash_post($post->ID);  /////////////////////////////
         switch_to_blog(self::$new_blog_id);
 
         // allow a natural ID on the new blog
@@ -107,9 +107,9 @@ class MW_Move_Posts {
         $post['tags_input'] = self::comma_tags($tags);
         $new_id = wp_insert_post($post);
 
-        $thumb_post->post_parent = $new_id;
-        unset($thumb_post->ID);
-        $thumb_new_id = wp_insert_attachment($thumb_post, false, $new_id);
+        // $thumb_post->post_parent = $new_id;
+        // unset($thumb_post->ID);
+        // $thumb_new_id = wp_insert_attachment($thumb_post, false, $new_id);
 
 
         self::do_comments($new_id, $comments);
@@ -137,6 +137,11 @@ class MW_Move_Posts {
             $query .= " WHERE ID=$newID";
             if( $wpdb->query($query) ){}else{echo $query; exit;}
             $query = false;
+
+            if ( $att->ID == $thumb_id ) {
+                update_post_meta( $new_id, '_thumbnail_id', $newID );
+            }
+
         endforeach;
         // duplicate attachment meta data
         foreach($IDs as $id):
@@ -150,7 +155,7 @@ class MW_Move_Posts {
 
         // end shit
 
-        update_post_meta( $new_id, '_thumbnail_id', $thumb_new_id );
+        
 
         // Doing it ?p=ID style to allow the new blog to change permalinks
         $new_link = trailingslashit(self::$new_blog_url) . '?p=' . $new_id;

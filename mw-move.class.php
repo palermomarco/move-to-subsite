@@ -71,6 +71,8 @@ class MW_Move_Posts {
 
     protected function move_post($post) {
 
+
+        // this is shit but simply works
         $oldpost = $post;
 
         global $wpdb;
@@ -82,6 +84,8 @@ class MW_Move_Posts {
         foreach ($attachments as $att) {
             $metas_by_id[$att->ID] = $wpdb->get_results("SELECT * FROM $wpdb->postmeta WHERE post_id = ".$att->ID);
         }
+
+        //end shit
 
         $old_link = trailingslashit(get_permalink($post->ID));
         $cats = get_the_terms($post->ID, 'category');
@@ -112,6 +116,8 @@ class MW_Move_Posts {
         self::migrate_meta($new_id, $meta);
         self::migrate_meta($thumb_new_id, $thumb_metas);
 
+        // this is shit but simply works
+
         //2. duplicate old attachments data
         foreach($attachments as $att):
             $wpdb->query("INSERT INTO $wpdb->posts (post_title) VALUES ('')");
@@ -141,6 +147,8 @@ class MW_Move_Posts {
                 $query = false;
             }
         endforeach;
+
+        // end shit
 
         update_post_meta( $new_id, '_thumbnail_id', $thumb_new_id );
 

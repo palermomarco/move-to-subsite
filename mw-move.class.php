@@ -88,7 +88,7 @@ class MW_Move_Posts {
         //end shit
 
         $old_link = trailingslashit(get_permalink($post->ID));
-        $cats = get_the_terms($post->ID, 'category');
+        //$cats = get_the_terms($post->ID, 'category');
         $tags = get_the_terms($post->ID, 'post_tag');
         $comments = get_comments(array('post_id' => $post->ID));
         $meta = get_post_custom($post->ID);
@@ -103,7 +103,7 @@ class MW_Move_Posts {
         // allow a natural ID on the new blog
         $post = (array) $post;
         unset($post['ID']);
-        $post['post_category'] = self::map_cats($cats);
+        //$post['post_category'] = self::map_cats($cats);
         $post['tags_input'] = self::comma_tags($tags);
         $new_id = wp_insert_post($post);
 
